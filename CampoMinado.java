@@ -15,8 +15,7 @@ public class CampoMinado {
 
         class Celula extends JButton {
             boolean temBomba = false;
-            boolean revelada = false;
-            boolean marcada = false;
+            int qtdBomba = 0;
 
             public Celula() {
                 super();
@@ -55,6 +54,23 @@ public class CampoMinado {
 
         for (int i=0; i < linhas; i++) {
             for ( int j=0; j < colunas; j++) {
+                final int x = i;
+                final int y = j;
+                for(int m1 = -1; m1 < 2; m1++){
+                    try {
+                        for(int m2 = -1; m2 < 2; m2++){
+                        if(celula[x+m1][y+m2].temBomba)
+                        celula[x][y].qtdBomba ++;
+                    }
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                    
+                }
+            }
+        }
+        for (int i=0; i < linhas; i++) {
+            for ( int j=0; j < colunas; j++) {
             final int x = i;
             final int y = j;
             celula[x][y].addMouseListener(new MouseAdapter() {
@@ -63,8 +79,8 @@ public class CampoMinado {
                         if (celula[x][y].temBomba) {
                             celula[x][y].setText("💣");
                             // fim de jogo
-                        } else {
-                            celula[x][y].setText("0"); // ou contagem de bombas ao redor
+                        } else { 
+                            celula[x][y].setText(String.valueOf(celula[x][y].qtdBomba)); // ou contagem de bombas ao redor
                         }
                     } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e)) {
                         celula[x][y].setText("🚩");
@@ -77,7 +93,7 @@ public class CampoMinado {
 
         
         frame.add(painel);
-        frame.setSize(200, 200);
+        frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     
