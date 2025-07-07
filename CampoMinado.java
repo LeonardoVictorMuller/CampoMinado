@@ -57,15 +57,12 @@ public class CampoMinado {
                 final int x = i;
                 final int y = j;
                 for(int m1 = -1; m1 < 2; m1++){
-                    try {
-                        for(int m2 = -1; m2 < 2; m2++){
-                        if(celula[x+m1][y+m2].temBomba)
-                        celula[x][y].qtdBomba ++;
+                    for(int m2 = -1; m2 < 2; m2++){
+                        try {
+                            if(celula[x+m1][y+m2].temBomba)   //da erro
+                            celula[x][y].qtdBomba ++;
+                        } catch (Exception e) {}
                     }
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-                    
                 }
             }
         }
