@@ -12,28 +12,16 @@ public class CampoMinado {
     static int linhas = 10;
     static int colunas = 10;
     static Color corDeFundo = new Color(0xd9Dff6);
-
-
-    static class Celula extends JButton {
-            boolean temBomba = false;
-            int qtdBomba = 0;
-
-
-            public Celula() {
-                super();
-            }
-        }
-       
-        static Celula[][] celula = new Celula[linhas][colunas];
+    static Celula[][] celula = new Celula[linhas][colunas];
 
     public static void main(String[] args) {
-        
+
         JFrame frame = new JFrame("Campo Minado");
-        
+
         JPanel painel = new JPanel();
         painel.setLayout(new GridLayout(linhas, colunas));
-        
-         
+
+
         // Inicializa todas as células
         for (int i = 0; i < linhas; i++) {
             for (int j = 0; j < colunas; j++) {
@@ -42,11 +30,9 @@ public class CampoMinado {
             }
         }
 
-
         int[] numeros = new int[10];
         HashSet<Integer> usados = new HashSet<>();
         Random rand = new Random();
-
 
         int d = 0;
         while (d < 10) {
@@ -58,7 +44,6 @@ public class CampoMinado {
             }
         }
 
-
         for (int n : numeros) {
             int g = n / 10;
             int h = n % 10;
@@ -67,7 +52,7 @@ public class CampoMinado {
 
         for (int i=0; i < linhas; i++) {
             for ( int j=0; j < colunas; j++) {
-           
+
             final int x = i;
             final int y = j;
 
@@ -97,7 +82,7 @@ public class CampoMinado {
                                 //                 celula[x+m1][y+m2].setForeground(Color.BLUE); // Cor vermelha
                                 //                 celula[x+m1][y+m2].setBackground(Color.GRAY); // quero que ele desbloqueie todos os 0 por perto igual no campo minado
                                 //             } catch (Exception er) {}
-                                //     }    
+                                //     }
                                 //     }
                                 // }
                                 desbloquear(x, y);
@@ -108,21 +93,21 @@ public class CampoMinado {
                         celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho 24, você pode ajustar
                         celula[x][y].setForeground(Color.RED); // Cor vermelha
                     }
-                     
+
                 }
             });
             }
-        
-        };
-        
-        
 
-       
+        };
+
+
+
+
         frame.add(painel);
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        
+
     }
     public static void desbloquear(int x, int y) {
         for (int m1 = -1; m1 < 2; m1++) {
@@ -144,7 +129,7 @@ public class CampoMinado {
         }
     }
     public static void mostrar(int x, int y) {
-        Color numero = Color.BLUE; 
+        Color numero = Color.BLUE;
         if(celula[x][y].qtdBomba == 1 || celula[x][y].qtdBomba == 0) numero = Color.BLUE;
         else if(celula[x][y].qtdBomba == 2) numero = Color.GREEN;
         else if(celula[x][y].qtdBomba == 3) numero = Color.RED;
