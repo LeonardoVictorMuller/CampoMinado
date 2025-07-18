@@ -13,6 +13,7 @@ public class CampoMinado {
     static int colunas = 10;
     static Color corDeFundo = new Color(0xd9Dff6);
     static Celula[][] celula = new Celula[linhas][colunas];
+    static int contador = 0;
 
     public static void main(String[] args) {
 
@@ -67,11 +68,17 @@ public class CampoMinado {
             celula[x][y].addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     if (SwingUtilities.isLeftMouseButton((java.awt.event.MouseEvent) e)) {
+                        
                         if (celula[x][y].temBomba) {
                             celula[x][y].setText("💣");
                             // fim de jogo
+                            JOptionPane.showMessageDialog(null, "Você perdeu!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+
                         } else {
                             mostrar(x,y);
+                            if(contador==90)
+                            JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+
                             if(celula[x][y].qtdBomba == 0){
                                 // for(int m1 = -1; m1 < 2; m1++){
                                 //     for(int m2 = -1; m2 < 2; m2++){
@@ -86,6 +93,8 @@ public class CampoMinado {
                                 //     }
                                 // }
                                 desbloquear(x, y);
+                                if(contador==90)
+                                JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                     } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e)) {
@@ -116,6 +125,8 @@ public class CampoMinado {
                 int ny = y + m2;
                 try {
                     if (nx >= 0 && ny >= 0 && nx < 10 && ny < 10) {
+                        
+
                         if (!celula[nx][ny].getText().equals("")) continue; // já revelada
 
                         mostrar(nx,ny);
@@ -129,6 +140,7 @@ public class CampoMinado {
         }
     }
     public static void mostrar(int x, int y) {
+        contador++;
         Color numero = Color.BLUE;
         if(celula[x][y].qtdBomba == 1 || celula[x][y].qtdBomba == 0) numero = Color.BLUE;
         else if(celula[x][y].qtdBomba == 2) numero = Color.GREEN;
