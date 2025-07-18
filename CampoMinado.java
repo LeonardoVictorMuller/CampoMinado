@@ -11,12 +11,18 @@ import java.awt.event.MouseAdapter;
 public class CampoMinado {
     static int linhas = 10;
     static int colunas = 10;
+    static int x = 10;
+    static int y = 10;
+
     static Color corDeFundo = new Color(0xd9Dff6);
     static Celula[][] celula = new Celula[linhas][colunas];
     static int contador = 0;
 
     public static void main(String[] args) {
+        jogo();
 
+    }
+    public static void jogo() {
         JFrame frame = new JFrame("Campo Minado");
 
         JPanel painel = new JPanel();
@@ -68,9 +74,14 @@ public class CampoMinado {
             celula[x][y].addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     if (SwingUtilities.isLeftMouseButton((java.awt.event.MouseEvent) e)) {
-                        
+                        if(contador == 0 && celula[x][y].qtdBomba != 0){
+                            return;
+                        }
+
                         if (celula[x][y].temBomba) {
                             celula[x][y].setText("💣");
+                            celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho 24, você pode ajustar
+                            celula[x][y].setForeground(Color.black); // Cor vermelha
                             // fim de jogo
                             JOptionPane.showMessageDialog(null, "Você perdeu!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
 
@@ -118,6 +129,7 @@ public class CampoMinado {
         frame.setVisible(true);
 
     }
+
     public static void desbloquear(int x, int y) {
         for (int m1 = -1; m1 < 2; m1++) {
             for (int m2 = -1; m2 < 2; m2++) {
