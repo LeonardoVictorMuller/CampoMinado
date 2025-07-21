@@ -25,6 +25,7 @@ public class Painel {
 
     public void gerar_celulas() {
         // zera as celulas
+        contador = 0;
         painel.removeAll();
         celula = new Celula[linhas][colunas];
 
@@ -51,14 +52,14 @@ public class Painel {
                 usados.add(num);
                 numeros[d] = num;
                 d++;
-            }
-        }
+            };
+        };
 
         for (int n : numeros) {
             int g = n / 10;
             int h = n % 10;
             celula[g][h].temBomba = true;
-        }
+        };
 
         for (int i=0; i < linhas; i++) {
             for ( int j=0; j < colunas; j++) {
@@ -72,14 +73,16 @@ public class Painel {
                             if(celula[x+m1][y+m2].temBomba)   //da erro
                                 celula[x][y].qtdBomba ++;
                         } catch (Exception e) {}
-                    }
-                }
+                    };
+                };
+                
                 celula[x][y].addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
                         if (SwingUtilities.isLeftMouseButton((java.awt.event.MouseEvent) e)) {
-                            if(contador == 0 && celula[x][y].qtdBomba != 0){
+                            if((contador == 0 && celula[x][y].qtdBomba != 0) || (contador == 0 && celula[x][y].temBomba == true)){
                                 return;
-                            }
+                                // gerar_celulas();
+                            };
 
                             if (celula[x][y].temBomba) {
                                 celula[x][y].setText("💣");
@@ -90,18 +93,25 @@ public class Painel {
                                 gerar_celulas();
                             } else {
                                 mostrar(x,y);
-                                if(contador==90)
+                                if(contador==90){
                                     JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+                                    gerar_celulas();
+                                }    
                                 if(celula[x][y].qtdBomba == 0){
                                     desbloquear(x, y);
-                                    if(contador==90)
+                                    if(contador==90){
                                         JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+                                        gerar_celulas();
+                                    }
                                 }
-                            }
+                            };
                         } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e)) {
+                            if(!celula[x][y].getText().equals("🚩")){
                             celula[x][y].setText("🚩");
-                            celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho 24, você pode ajustar
+                            celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho você pode ajustar
                             celula[x][y].setForeground(Color.RED); // Cor vermelha
+                            }else{celula[x][y].setText("");}
+
                         }
 
                     }

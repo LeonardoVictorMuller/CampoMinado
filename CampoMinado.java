@@ -1,11 +1,11 @@
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.util.HashSet;
-import java.util.Random;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
+// import java.awt.event.MouseEvent;
+// import java.util.HashSet;
+// import java.util.Random;
+// import java.awt.Color;
+// import java.awt.Font;
+// import java.awt.GridLayout;
+// import java.awt.event.MouseAdapter;
 
 public class CampoMinado {
     public static void main(String[] args) {
