@@ -78,7 +78,7 @@ public class Painel {
                 
                 celula[x][y].addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
-                        if (SwingUtilities.isLeftMouseButton((java.awt.event.MouseEvent) e)) {
+                        if (SwingUtilities.isLeftMouseButton((java.awt.event.MouseEvent) e) && !teste(x, y)) {
                             if((contador == 0 && celula[x][y].qtdBomba != 0) || (contador == 0 && celula[x][y].temBomba == true)){
                                 return;
                                 // gerar_celulas();
@@ -105,7 +105,7 @@ public class Painel {
                                     }
                                 }
                             };
-                        } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e)) {
+                        } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e) && !teste(x, y)) {
                             if(!celula[x][y].getText().equals("🚩")){
                             celula[x][y].setText("🚩");
                             celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho você pode ajustar
@@ -153,6 +153,20 @@ public class Painel {
         celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50));
         celula[x][y].setForeground(numero); // Cor vermelha
         celula[x][y].setBackground(corDeFundo);
+    }
+
+    public boolean teste(int x, int y) {
+        if(celula[x][y].getText().equals("0") 
+        || celula[x][y].getText().equals("1") 
+        || celula[x][y].getText().equals("2") 
+        || celula[x][y].getText().equals("3") 
+        || celula[x][y].getText().equals("4") 
+        || celula[x][y].getText().equals("5") 
+        || celula[x][y].getText().equals("6")
+        || celula[x][y].getText().equals("7")
+        || celula[x][y].getText().equals("8")){
+            return true;
+        }else{return false;}
     }
 
 }
