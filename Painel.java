@@ -38,7 +38,7 @@ public class Painel {
             case ("Difícil"):
                 numeroBombas = 20;
                 break;
-            case ("Imposivel"):
+            case ("Impossível"):
                 numeroBombas = 30;
                 break;
             default:
