@@ -5,6 +5,8 @@ public class MenuPrincipal {
     JPanel painelMenuPrincipal = new JPanel();
     JButton botaoIniciar = new JButton();
     JButton botaoSair = new JButton();
+    final String[] dificuldades = {"Fácil", "Médio", "Difícil"};
+    JComboBox<String> opcaoDificuldades = new JComboBox<>(dificuldades);
 
     public MenuPrincipal() {
         painelMenuPrincipal.setSize(300, 300);
@@ -20,11 +22,26 @@ public class MenuPrincipal {
         botaoSair.setText("Sair");
         botaoSair.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        JLabel labelDificuldade = new JLabel();
+        labelDificuldade.setText("Escolha a dificuldade: ");
+        labelDificuldade.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        opcaoDificuldades.setMaximumSize(new Dimension(100, 30));
+
+        // Box.createVerticalStrut serve para colocar um componente em baixo do outro
+
         painelMenuPrincipal.add(Box.createVerticalGlue()); // Alinha verticalmente os componentes
         painelMenuPrincipal.add(titulo);
         painelMenuPrincipal.add(Box.createVerticalStrut(10));
+
+        painelMenuPrincipal.add(labelDificuldade);
+        painelMenuPrincipal.add(Box.createVerticalStrut(10));
+        painelMenuPrincipal.add(opcaoDificuldades);
+        painelMenuPrincipal.add(Box.createVerticalStrut(10));
+
         painelMenuPrincipal.add(botaoIniciar);
         painelMenuPrincipal.add(Box.createVerticalStrut(10));
+
         painelMenuPrincipal.add(botaoSair);
         painelMenuPrincipal.add(Box.createVerticalGlue()); // Alinha verticalmente os componentes
     }

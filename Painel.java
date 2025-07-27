@@ -12,6 +12,7 @@ public class Painel {
     static int colunas = 10;
     static int x = 10;
     static int y = 10;
+    int numeroBombas = 10;
 
     JPanel painel = new JPanel();
 
@@ -21,6 +22,23 @@ public class Painel {
 
     public Painel() {
         painel.setLayout(new GridLayout(linhas, colunas));
+    }
+
+    public void setNumeroBombas(String dificuldade) {
+        switch (dificuldade) {
+            case ("Fácil"):
+                numeroBombas = 10;
+                break;
+            case ("Médio"):
+                numeroBombas = 20;
+                break;
+            case ("Difícil"):
+                numeroBombas = 30;
+                break;
+            default:
+                numeroBombas = 10;
+                break;
+        }
     }
 
     public void gerar_celulas() {
@@ -41,48 +59,55 @@ public class Painel {
         painel.revalidate();
         painel.repaint();
 
-        int[] numeros = new int[10];
+        int[] numeros = new int[numeroBombas];
         HashSet<Integer> usados = new HashSet<>();
         Random rand = new Random();
 
         int d = 0;
-        while (d < 10) {
+        while (d < numeroBombas) {
             int num = rand.nextInt(100); // Gera 10 números entre 0 e 99 que vao ser os lugares da bomba
             if (!usados.contains(num)) {
                 usados.add(num);
                 numeros[d] = num;
                 d++;
-            };
-        };
+            }
+            ;
+        }
+        ;
 
         for (int n : numeros) {
             int g = n / 10;
             int h = n % 10;
             celula[g][h].temBomba = true;
-        };
+        }
+        ;
 
-        for (int i=0; i < linhas; i++) {
-            for ( int j=0; j < colunas; j++) {
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
 
                 final int x = i;
                 final int y = j;
 
-                for(int m1 = -1; m1 < 2; m1++){
-                    for(int m2 = -1; m2 < 2; m2++){
+                for (int m1 = -1; m1 < 2; m1++) {
+                    for (int m2 = -1; m2 < 2; m2++) {
                         try {
-                            if(celula[x+m1][y+m2].temBomba)   //da erro
-                                celula[x][y].qtdBomba ++;
-                        } catch (Exception e) {}
-                    };
-                };
-                
+                            if (celula[x + m1][y + m2].temBomba)   //da erro
+                                celula[x][y].qtdBomba++;
+                        } catch (Exception e) {
+                        }
+                    }
+                    ;
+                }
+                ;
+
                 celula[x][y].addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
                         if (SwingUtilities.isLeftMouseButton((java.awt.event.MouseEvent) e) && !teste(x, y)) {
-                            if((contador == 0 && celula[x][y].qtdBomba != 0) || (contador == 0 && celula[x][y].temBomba == true)){
+                            if ((contador == 0 && celula[x][y].qtdBomba != 0) || (contador == 0 && celula[x][y].temBomba == true)) {
                                 return;
                                 // gerar_celulas();
-                            };
+                            }
+                            ;
 
                             if (celula[x][y].temBomba) {
                                 celula[x][y].setText("💣");
@@ -92,25 +117,28 @@ public class Painel {
                                 JOptionPane.showMessageDialog(null, "Você perdeu!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                 gerar_celulas();
                             } else {
-                                mostrar(x,y);
-                                if(contador==90){
+                                mostrar(x, y);
+                                if (contador == 90) {
                                     JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                     gerar_celulas();
-                                }    
-                                if(celula[x][y].qtdBomba == 0){
+                                }
+                                if (celula[x][y].qtdBomba == 0) {
                                     desbloquear(x, y);
-                                    if(contador==90){
+                                    if (contador == 90) {
                                         JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                         gerar_celulas();
                                     }
                                 }
-                            };
+                            }
+                            ;
                         } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e) && !teste(x, y)) {
-                            if(!celula[x][y].getText().equals("🚩")){
-                            celula[x][y].setText("🚩");
-                            celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho você pode ajustar
-                            celula[x][y].setForeground(Color.RED); // Cor vermelha
-                            }else{celula[x][y].setText("");}
+                            if (!celula[x][y].getText().equals("🚩")) {
+                                celula[x][y].setText("🚩");
+                                celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho você pode ajustar
+                                celula[x][y].setForeground(Color.RED); // Cor vermelha
+                            } else {
+                                celula[x][y].setText("");
+                            }
 
                         }
 
@@ -118,7 +146,8 @@ public class Painel {
                 });
             }
 
-        };
+        }
+        ;
     }
 
     public void desbloquear(int x, int y) {
@@ -132,22 +161,24 @@ public class Painel {
 
                         if (!celula[nx][ny].getText().equals("")) continue; // já revelada
 
-                        mostrar(nx,ny);
+                        mostrar(nx, ny);
 
                         if (celula[nx][ny].qtdBomba == 0) {
                             desbloquear(nx, ny); // chamada recursiva
                         }
                     }
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
             }
         }
     }
+
     public void mostrar(int x, int y) {
         contador++;
         Color numero = Color.BLUE;
-        if(celula[x][y].qtdBomba == 1 || celula[x][y].qtdBomba == 0) numero = Color.BLUE;
-        else if(celula[x][y].qtdBomba == 2) numero = Color.GREEN;
-        else if(celula[x][y].qtdBomba == 3) numero = Color.RED;
+        if (celula[x][y].qtdBomba == 1 || celula[x][y].qtdBomba == 0) numero = Color.BLUE;
+        else if (celula[x][y].qtdBomba == 2) numero = Color.GREEN;
+        else if (celula[x][y].qtdBomba == 3) numero = Color.RED;
         else numero = Color.MAGENTA;
         celula[x][y].setText(String.valueOf(celula[x][y].qtdBomba)); // ou contagem de bombas ao redor
         celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50));
@@ -156,17 +187,19 @@ public class Painel {
     }
 
     public boolean teste(int x, int y) {
-        if(celula[x][y].getText().equals("0") 
-        || celula[x][y].getText().equals("1") 
-        || celula[x][y].getText().equals("2") 
-        || celula[x][y].getText().equals("3") 
-        || celula[x][y].getText().equals("4") 
-        || celula[x][y].getText().equals("5") 
-        || celula[x][y].getText().equals("6")
-        || celula[x][y].getText().equals("7")
-        || celula[x][y].getText().equals("8")){
+        if (celula[x][y].getText().equals("0")
+                || celula[x][y].getText().equals("1")
+                || celula[x][y].getText().equals("2")
+                || celula[x][y].getText().equals("3")
+                || celula[x][y].getText().equals("4")
+                || celula[x][y].getText().equals("5")
+                || celula[x][y].getText().equals("6")
+                || celula[x][y].getText().equals("7")
+                || celula[x][y].getText().equals("8")) {
             return true;
-        }else{return false;}
+        } else {
+            return false;
+        }
     }
 
 }
