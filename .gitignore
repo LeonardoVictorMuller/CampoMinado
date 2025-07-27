@@ -1,3 +1,10 @@
 CampoMinado.class
 CampoMinado$1.class
 Celula.class
+misc.xml
+Painel.class
+vcs.xml
+modules.xml
+CampoMinado.iml
+out/production/
+.idea
