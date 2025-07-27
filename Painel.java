@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Random;
 import java.awt.Color;
@@ -95,12 +98,18 @@ public class Painel {
                                 mostrar(x,y);
                                 if(contador==90){
                                     JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+                                    if(CampoMinado.comp){
+                                        compet();
+                                    }
                                     gerar_celulas();
                                 }    
                                 if(celula[x][y].qtdBomba == 0){
                                     desbloquear(x, y);
                                     if(contador==90){
                                         JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+                                        if(CampoMinado.comp){
+                                            compet();
+                                        }
                                         gerar_celulas();
                                     }
                                 }
@@ -167,6 +176,38 @@ public class Painel {
         || celula[x][y].getText().equals("8")){
             return true;
         }else{return false;}
+    }
+    public void compet() {
+        double tempoFinal = System.currentTimeMillis();
+        double duracaoMillis = tempoFinal - CampoMinado.tempoInicio;
+        double duracaoSegundos = duracaoMillis / 1000;
+
+        JOptionPane.showMessageDialog(null, "Seu tempo foi " + (duracaoSegundos) + " segundos", "Modo Competitivo", JOptionPane.INFORMATION_MESSAGE);
+        String nome = JOptionPane.showInputDialog(null, "Digite seu nome:", "Modo Competitivo", JOptionPane.QUESTION_MESSAGE);
+
+        CampoMinado.tempoInicio = System.currentTimeMillis();
+        enviarTempoParaPlanilha(nome, duracaoSegundos);
+    }
+
+    public void enviarTempoParaPlanilha(String nome, double tempo) {
+        try {
+             String urlString = "https://script.google.com/macros/s/AKfycbxtoi4JmeRctUUbhoT9iVMOpjibyprdrYAc-1mm5m9iFX4JT0NfAlh6_rYgtKLCy_3a7g/exec"
+                + "?nome=" + URLEncoder.encode(nome, "UTF-8")
+                + "&tempo=" + tempo;
+               URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
+            int status = con.getResponseCode();
+            if (status == 200) {
+                System.out.println("Tempo enviado com sucesso!");
+            } else {
+                System.out.println("Erro ao enviar tempo. Código: " + status);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

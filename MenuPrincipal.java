@@ -5,6 +5,7 @@ public class MenuPrincipal {
     JPanel painelMenuPrincipal = new JPanel();
     JButton botaoIniciar = new JButton();
     JButton botaoSair = new JButton();
+    JButton botaoCompetitivo = new JButton();
 
     public MenuPrincipal() {
         painelMenuPrincipal.setSize(300, 300);
@@ -20,12 +21,17 @@ public class MenuPrincipal {
         botaoSair.setText("Sair");
         botaoSair.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+         botaoCompetitivo.setText("Competitivo");
+        botaoCompetitivo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         painelMenuPrincipal.add(Box.createVerticalGlue()); // Alinha verticalmente os componentes
         painelMenuPrincipal.add(titulo);
         painelMenuPrincipal.add(Box.createVerticalStrut(10));
         painelMenuPrincipal.add(botaoIniciar);
         painelMenuPrincipal.add(Box.createVerticalStrut(10));
         painelMenuPrincipal.add(botaoSair);
+        painelMenuPrincipal.add(Box.createVerticalStrut(10));
+        painelMenuPrincipal.add(botaoCompetitivo);
         painelMenuPrincipal.add(Box.createVerticalGlue()); // Alinha verticalmente os componentes
     }
 }
