@@ -32,10 +32,11 @@ public class MenuPrincipal {
 
         opcaoDificuldades.setMaximumSize(new Dimension(100, 30));
 
-        // Box.createVerticalStrut serve para colocar um componente em baixo do outro
-
-         botaoCompetitivo.setText("Competitivo");
+        botaoCompetitivo.setText("Competitivo");
         botaoCompetitivo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoCompetitivo.setBackground(new Color(0xe0e0e0));
+
+        // Box.createVerticalStrut serve para colocar um componente em baixo do outro
 
         painelMenuPrincipal.add(Box.createVerticalGlue()); // Alinha verticalmente os componentes
         painelMenuPrincipal.add(titulo);
@@ -49,9 +50,10 @@ public class MenuPrincipal {
         painelMenuPrincipal.add(botaoIniciar);
         painelMenuPrincipal.add(Box.createVerticalStrut(10));
 
-        painelMenuPrincipal.add(botaoSair);
-        painelMenuPrincipal.add(Box.createVerticalStrut(10));
         painelMenuPrincipal.add(botaoCompetitivo);
+        painelMenuPrincipal.add(Box.createVerticalStrut(10));
+
+        painelMenuPrincipal.add(botaoSair);
         painelMenuPrincipal.add(Box.createVerticalGlue()); // Alinha verticalmente os componentes
     }
 }

@@ -46,6 +46,7 @@ public class CampoMinado {
             public void mousePressed(MouseEvent e) {
                 tempoInicio = System.currentTimeMillis();
                 comp = true;
+                painelJogo.gerar_celulas();
                 frame.remove(menuPrincipal.painelMenuPrincipal);
                 frame.add(painelJogo.painel);
 
