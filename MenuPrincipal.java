@@ -5,7 +5,7 @@ public class MenuPrincipal {
     JPanel painelMenuPrincipal = new JPanel();
     JButton botaoIniciar = new JButton();
     JButton botaoSair = new JButton();
-    final String[] dificuldades = {"Fácil", "Médio", "Difícil"};
+    final String[] dificuldades = {"Fácil", "Médio", "Difícil" , "Impossível"};
     JComboBox<String> opcaoDificuldades = new JComboBox<>(dificuldades);
 
     public MenuPrincipal() {

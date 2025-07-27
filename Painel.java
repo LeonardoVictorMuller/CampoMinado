@@ -30,9 +30,12 @@ public class Painel {
                 numeroBombas = 10;
                 break;
             case ("Médio"):
-                numeroBombas = 20;
+                numeroBombas = 15;
                 break;
             case ("Difícil"):
+                numeroBombas = 20;
+                break;
+            case ("Imposivel"):
                 numeroBombas = 30;
                 break;
             default:
@@ -118,13 +121,13 @@ public class Painel {
                                 gerar_celulas();
                             } else {
                                 mostrar(x, y);
-                                if (contador == 90) {
+                                if (contador == (100-numeroBombas)) {
                                     JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                     gerar_celulas();
                                 }
                                 if (celula[x][y].qtdBomba == 0) {
                                     desbloquear(x, y);
-                                    if (contador == 90) {
+                                    if (contador == (100-numeroBombas)) {
                                         JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                         gerar_celulas();
                                     }
