@@ -5,7 +5,7 @@ public class MenuPrincipal {
     JPanel painelMenuPrincipal = new JPanel();
     JButton botaoIniciar = new JButton();
     JButton botaoSair = new JButton();
-    final String[] dificuldades = {"Fácil", "Médio", "Difícil" , "Impossível"};
+    final String[] dificuldades = {"Fácil", "Médio", "Difícil", "Impossível"};
     JComboBox<String> opcaoDificuldades = new JComboBox<>(dificuldades);
 
     public MenuPrincipal() {
@@ -14,13 +14,16 @@ public class MenuPrincipal {
 
         JLabel titulo = new JLabel();
         titulo.setText("Campo minado");
+        titulo.setFont(new Font("SansSerif", Font.PLAIN, 30));
         titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         botaoIniciar.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoIniciar.setText("Iniciar");
+        botaoIniciar.setBackground(new Color(0xe0e0e0));
 
         botaoSair.setText("Sair");
         botaoSair.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoSair.setBackground(new Color(0xe0e0e0));
 
         JLabel labelDificuldade = new JLabel();
         labelDificuldade.setText("Escolha a dificuldade: ");

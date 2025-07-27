@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Celula extends JButton {
     boolean temBomba = false;
@@ -6,5 +7,6 @@ public class Celula extends JButton {
 
     public Celula() {
         super();
+        this.setBackground(new Color(204, 204, 204));
     }
 }

@@ -16,7 +16,7 @@ public class Painel {
 
     JPanel painel = new JPanel();
 
-    static Color corDeFundo = new Color(0xd9Dff6);
+    static Color corDeFundo = new Color(0xe0e0e0);
     Celula[][] celula;
     static int contador = 0;
 
@@ -114,20 +114,20 @@ public class Painel {
 
                             if (celula[x][y].temBomba) {
                                 celula[x][y].setText("💣");
-                                celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho 24, você pode ajustar
+                                celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 30)); // Tamanho 24, você pode ajustar
                                 celula[x][y].setForeground(Color.black); // Cor vermelha
                                 // fim de jogo
                                 JOptionPane.showMessageDialog(null, "Você perdeu!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                 gerar_celulas();
                             } else {
                                 mostrar(x, y);
-                                if (contador == (100-numeroBombas)) {
+                                if (contador == (100 - numeroBombas)) {
                                     JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                     gerar_celulas();
                                 }
                                 if (celula[x][y].qtdBomba == 0) {
                                     desbloquear(x, y);
-                                    if (contador == (100-numeroBombas)) {
+                                    if (contador == (100 - numeroBombas)) {
                                         JOptionPane.showMessageDialog(null, "Você ganhou!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
                                         gerar_celulas();
                                     }
@@ -137,7 +137,7 @@ public class Painel {
                         } else if (SwingUtilities.isRightMouseButton((java.awt.event.MouseEvent) e) && !teste(x, y)) {
                             if (!celula[x][y].getText().equals("🚩")) {
                                 celula[x][y].setText("🚩");
-                                celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50)); // Tamanho você pode ajustar
+                                celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 30)); // Tamanho você pode ajustar
                                 celula[x][y].setForeground(Color.RED); // Cor vermelha
                             } else {
                                 celula[x][y].setText("");
@@ -184,7 +184,7 @@ public class Painel {
         else if (celula[x][y].qtdBomba == 3) numero = Color.RED;
         else numero = Color.MAGENTA;
         celula[x][y].setText(String.valueOf(celula[x][y].qtdBomba)); // ou contagem de bombas ao redor
-        celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 50));
+        celula[x][y].setFont(new Font("SansSerif", Font.PLAIN, 30));
         celula[x][y].setForeground(numero); // Cor vermelha
         celula[x][y].setBackground(corDeFundo);
     }
