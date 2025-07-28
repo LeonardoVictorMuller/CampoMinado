@@ -50,6 +50,7 @@ O jogo agora possui um modo **Competitivo**, onde o objetivo é vencer o Campo M
 - **MouseListener / MouseAdapter**
 - **HttpURLConnection** (para envio de dados)
 - **Google Apps Script** (integração com Google Sheets)
+- [Notion](https://www.notion.so/Projeto-campo-minado-230a29ffe2cf809f90b3f002f1664f9f)
 
 ---
 
